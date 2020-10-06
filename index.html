@@ -98,6 +98,45 @@
       </section>
       <section class="- topic/section section" id="briqpy__section_ppp_n2v_bnb"><h2 class="- topic/title title sectiontitle">Briqpy module</h2>
          
+         <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Usage</strong></p>
+         <div class="- topic/p p">Example to get some info about the lengths of the walls in the drawing:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>lengths = []
+
+for wall in bim_model.filter(Type='Wall'):
+    lengths.append(wall.prop('Length'))
+
+print(f'wall lengths. max: {max(lengths)}, avg: {sum(lengths)/len(lengths)}')</code></pre></div>
+         <div class="- topic/p p">Example to create a selection and print the objects:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>bim_model.filter(Type='Wall', IsExternal=True).select()
+</code></pre><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>for wall in bim_model.filter(Type='Wall', IsExternal=True, Length=max(lengths)):
+    print(wall)</code></pre></div>
+         <div class="- topic/p p">Example to get the parts of the roof that are close to a wall:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>roof_parts = bim_model.filter(Type='Roof').parts()
+
+roof_parts_close_to_wall = bim_model.filter(Type='Wall').within_distance(40, 'cm', search_range=roof_parts)</code></pre></div>
+         <div class="- topic/p p">Example to filter with functions:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>def is_long(obj): return obj.prop('Length') &gt; 50
+
+roof_parts.filter(is_long)</code></pre></div>
+         <div class="- topic/p p">Example to export data:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code># create a dictionary list
+wall_info = [
+    {
+        'Handle': wall.prop('Handle'),
+        'Length': wall.prop('Length'),
+        'Height': wall.prop('Height')
+    } for wall in bim_model.filter(Type='Wall')]
+
+# export to .json
+import json
+file = open('path/to/file.json', 'w+')
+file.write(json.dumps(wall_info, indent=4))
+file.close()
+
+# plotting a histogram
+import matplotlib.pyplot as plt
+import pandas as pd
+df = pd.DataFrame(wall_info)
+df.hist();
+plt.show()
+
+# export to .csv
+df.to_csv(r'path/to/file.csv', index = False, header=True)</code></pre></div>
          <div class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">API</strong><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code># class representing BIM objects
 class briqpy.Object
     # get property value
@@ -153,47 +192,6 @@ class briqpy.ObjectRange
     def count()</code></pre>
          </div>
       </section>
-      <section class="- topic/section section" id="briqpy__section_kvf_d1v_bnb"><h2 class="- topic/title title sectiontitle">Examples</h2>
-         
-         <div class="- topic/p p">Example to get some info about the lengths of the walls in the drawing:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>lengths = []
-
-for wall in bim_model.filter(Type='Wall'):
-    lengths.append(wall.prop('Length'))
-
-print(f'wall lengths. max: {max(lengths)}, avg: {sum(lengths)/len(lengths)}')</code></pre></div>
-         <div class="- topic/p p">Example to create a selection and print the objects:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>bim_model.filter(Type='Wall', IsExternal=True).select()
-</code></pre><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>for wall in bim_model.filter(Type='Wall', IsExternal=True, Length=max(lengths)):
-    print(wall)</code></pre></div>
-         <div class="- topic/p p">Example to get the parts of the roof that are close to a wall:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>roof_parts = bim_model.filter(Type='Roof').parts()
-
-roof_parts_close_to_wall = bim_model.filter(Type='Wall').within_distance(40, 'cm', search_range=roof_parts)</code></pre></div>
-         <div class="- topic/p p">Example to filter with functions:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>def is_long(obj): return obj.prop('Length') &gt; 50
-
-roof_parts.filter(is_long)</code></pre></div>
-         <div class="- topic/p p">Example to export data:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code># create a dictionary list
-wall_info = [
-    {
-        'Handle': wall.prop('Handle'),
-        'Length': wall.prop('Length'),
-        'Height': wall.prop('Height')
-    } for wall in bim_model.filter(Type='Wall')]
-
-# export to .json
-import json
-file = open('path/to/file.json', 'w+')
-file.write(json.dumps(wall_info, indent=4))
-file.close()
-
-# plotting a histogram
-import matplotlib.pyplot as plt
-import pandas as pd
-df = pd.DataFrame(wall_info)
-df.hist();
-plt.show()
-
-# export to .csv
-df.to_csv(r'path/to/file.csv', index = False, header=True)</code></pre></div>
-      </section>
    </div>
 </article></main></div>
                         
@@ -203,7 +201,7 @@ df.to_csv(r'path/to/file.csv', index = False, header=True)</code></pre></div>
                     </div>
                     
                         <nav role="navigation" id="wh_topic_toc" class="col-lg-2 d-none d-lg-block navbar d-print-none"> 
-                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="section-item"><div class="section-title"><a href="#briqpy__section_mjc_xz5_bnb" data-tocid="briqpy__section_mjc_xz5_bnb">Running Python</a></div></li><li class="section-item"><div class="section-title"><a href="#briqpy__section_ppp_n2v_bnb" data-tocid="briqpy__section_ppp_n2v_bnb">Briqpy module</a></div></li><li class="section-item"><div class="section-title"><a href="#briqpy__section_kvf_d1v_bnb" data-tocid="briqpy__section_kvf_d1v_bnb">Examples</a></div></li></ul></div>
+                            <div class=" wh_topic_toc "><div class="wh_topic_label">On this page</div><ul><li class="section-item"><div class="section-title"><a href="#briqpy__section_mjc_xz5_bnb" data-tocid="briqpy__section_mjc_xz5_bnb">Running Python</a></div></li><li class="section-item"><div class="section-title"><a href="#briqpy__section_ppp_n2v_bnb" data-tocid="briqpy__section_ppp_n2v_bnb">Briqpy module</a></div></li></ul></div>
                         </nav>
                     
                 </div>
