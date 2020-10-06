@@ -1,1 +1,1 @@
-# bricpy.github.io
+# BricPy
