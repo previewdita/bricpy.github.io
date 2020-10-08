@@ -99,97 +99,97 @@
       <section class="- topic/section section" id="briqpy__section_ppp_n2v_bnb"><h2 class="- topic/title title sectiontitle">Briqpy module</h2>
          
          <p class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">Usage</strong></p>
-         <div class="- topic/p p">Example to get some info about the lengths of the walls in the drawing:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>lengths = []
+         <div class="- topic/p p">Example to get some info about the lengths of the walls in the drawing:<pre class="+ topic/pre pr-d/codeblock pre codeblock language-python">lengths = []
 
-for wall in bim_model.filter(Type='Wall'):
-    lengths.append(wall.prop('Length'))
+<strong class="hl-keyword">for</strong> wall <strong class="hl-keyword">in</strong> bim_model.filter(Type=<span class="hl-string">'Wall'</span>):
+    lengths.append(wall.prop(<span class="hl-string">'Length'</span>))
 
-print(f'wall lengths. max: {max(lengths)}, avg: {sum(lengths)/len(lengths)}')</code></pre></div>
-         <div class="- topic/p p">Example to create a selection and print the objects:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>bim_model.filter(Type='Wall', IsExternal=True).select()
-</code></pre><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>for wall in bim_model.filter(Type='Wall', IsExternal=True, Length=max(lengths)):
-    print(wall)</code></pre></div>
-         <div class="- topic/p p">Example to get the parts of the roof that are close to a wall:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>roof_parts = bim_model.filter(Type='Roof').parts()
+<strong class="hl-keyword">print</strong>(f<span class="hl-string">'wall lengths. max: {max(lengths)}, avg: {sum(lengths)/len(lengths)}'</span>)</pre></div>
+         <div class="- topic/p p">Example to create a selection and print the objects:<pre class="+ topic/pre pr-d/codeblock pre codeblock language-python">bim_model.filter(Type=<span class="hl-string">'Wall'</span>, IsExternal=True).select()
+</pre><pre class="+ topic/pre pr-d/codeblock pre codeblock language-python"><strong class="hl-keyword">for</strong> wall <strong class="hl-keyword">in</strong> bim_model.filter(Type=<span class="hl-string">'Wall'</span>, IsExternal=True, Length=max(lengths)):
+    <strong class="hl-keyword">print</strong>(wall)</pre></div>
+         <div class="- topic/p p">Example to get the parts of the roof that are close to a wall:<pre class="+ topic/pre pr-d/codeblock pre codeblock language-python">roof_parts = bim_model.filter(Type=<span class="hl-string">'Roof'</span>).parts()
 
-roof_parts_close_to_wall = bim_model.filter(Type='Wall').within_distance(40, 'cm', search_range=roof_parts)</code></pre></div>
-         <div class="- topic/p p">Example to filter with functions:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code>def is_long(obj): return obj.prop('Length') &gt; 50
+roof_parts_close_to_wall = bim_model.filter(Type=<span class="hl-string">'Wall'</span>).within_distance(<span class="hl-number">40</span>, <span class="hl-string">'cm'</span>, search_range=roof_parts)</pre></div>
+         <div class="- topic/p p">Example to filter with functions:<pre class="+ topic/pre pr-d/codeblock pre codeblock language-python"><strong class="hl-keyword">def</strong> is_long(obj): <strong class="hl-keyword">return</strong> obj.prop(<span class="hl-string">'Length'</span>) &gt; <span class="hl-number">50</span>
 
-roof_parts.filter(is_long)</code></pre></div>
-         <div class="- topic/p p">Example to export data:<pre class="+ topic/pre pr-d/codeblock pre codeblock"><code># create a dictionary list
+roof_parts.filter(is_long)</pre></div>
+         <div class="- topic/p p">Example to export data:<pre class="+ topic/pre pr-d/codeblock pre codeblock language-python"><em class="hl-comment"># create a dictionary list</em>
 wall_info = [
     {
-        'Handle': wall.prop('Handle'),
-        'Length': wall.prop('Length'),
-        'Height': wall.prop('Height')
-    } for wall in bim_model.filter(Type='Wall')]
+        <span class="hl-string">'Handle'</span>: wall.prop(<span class="hl-string">'Handle'</span>),
+        <span class="hl-string">'Length'</span>: wall.prop(<span class="hl-string">'Length'</span>),
+        <span class="hl-string">'Height'</span>: wall.prop(<span class="hl-string">'Height'</span>)
+    } <strong class="hl-keyword">for</strong> wall <strong class="hl-keyword">in</strong> bim_model.filter(Type=<span class="hl-string">'Wall'</span>)]
 
-# export to .json
-import json
-file = open('path/to/file.json', 'w+')
-file.write(json.dumps(wall_info, indent=4))
+<em class="hl-comment"># export to .json</em>
+<strong class="hl-keyword">import</strong> json
+file = open(<span class="hl-string">'path/to/file.json'</span>, <span class="hl-string">'w+'</span>)
+file.write(json.dumps(wall_info, indent=<span class="hl-number">4</span>))
 file.close()
 
-# plotting a histogram
-import matplotlib.pyplot as plt
-import pandas as pd
+<em class="hl-comment"># plotting a histogram</em>
+<strong class="hl-keyword">import</strong> matplotlib.pyplot <strong class="hl-keyword">as</strong> plt
+<strong class="hl-keyword">import</strong> pandas <strong class="hl-keyword">as</strong> pd
 df = pd.DataFrame(wall_info)
 df.hist();
 plt.show()
 
-# export to .csv
-df.to_csv(r'path/to/file.csv', index = False, header=True)</code></pre></div>
-         <div class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">API</strong><pre class="+ topic/pre pr-d/codeblock pre codeblock"><code># class representing BIM objects
-class briqpy.Object
-    # get property value
-    def prop(propName)
+<em class="hl-comment"># export to .csv</em>
+df.to_csv(r<span class="hl-string">'path/to/file.csv'</span>, index = False, header=True)</pre></div>
+         <div class="- topic/p p"><strong class="+ topic/ph hi-d/b ph b">API</strong><pre class="+ topic/pre pr-d/codeblock pre codeblock language-python"><em class="hl-comment"># class representing BIM objects</em>
+<strong class="hl-keyword">class</strong> briqpy.Object
+    <em class="hl-comment"># get property value</em>
+    <strong class="hl-keyword">def</strong> prop(propName)
 
-    # calculate the distance between two objects
-    # options for unit: any unit form insunits ('Centimeters', 'Feet', 'Parsecs' etc.) and these abbreviations: 'mm', 'cm, 'm', 'km', 'ft'
-    def distance_to(otherObj, unit='undefined')
+    <em class="hl-comment"># calculate the distance between two objects</em>
+    <em class="hl-comment"># options for unit: any unit form insunits ('Centimeters', 'Feet', 'Parsecs' etc.) and these abbreviations: 'mm', 'cm, 'm', 'km', 'ft'</em>
+    <strong class="hl-keyword">def</strong> distance_to(otherObj, unit=<span class="hl-string">'undefined'</span>)
 
-    # get the sub-elements of this object
-    # to return non empty range, this object has to be a block reference containing bim objects
-    def parts()
+    <em class="hl-comment"># get the sub-elements of this object</em>
+    <em class="hl-comment"># to return non empty range, this object has to be a block reference containing bim objects</em>
+    <strong class="hl-keyword">def</strong> parts()
 
-    # get the parent element of this sub-element
-    def parent()
+    <em class="hl-comment"># get the parent element of this sub-element</em>
+    <strong class="hl-keyword">def</strong> parent()
 
-    # get a list of objects that are within the clearance of arg distance
-    # options for distance_mode: 'bbox_center', 'bbox', exact'
-    # options for unit: see distance_to
-    # it's necessary to provide a search_range for nested objects (coming form parts())
-    def within_distance(distance, unit='undefined', distance_mode='exact', search_range=bim_model)
+    <em class="hl-comment"># get a list of objects that are within the clearance of arg distance</em>
+    <em class="hl-comment"># options for distance_mode: 'bbox_center', 'bbox', exact'</em>
+    <em class="hl-comment"># options for unit: see distance_to</em>
+    <em class="hl-comment"># it's necessary to provide a search_range for nested objects (coming form parts())</em>
+    <strong class="hl-keyword">def</strong> within_distance(distance, unit=<span class="hl-string">'undefined'</span>, distance_mode=<span class="hl-string">'exact'</span>, search_range=bim_model)
 
-    # add object to selection
-    def select()
+    <em class="hl-comment"># add object to selection</em>
+    <strong class="hl-keyword">def</strong> select()
 
-    # remove object from selection
-    def deselect()</code></pre></div>
+    <em class="hl-comment"># remove object from selection</em>
+    <strong class="hl-keyword">def</strong> deselect()</pre></div>
          <div class="- topic/p p">
-            <pre class="+ topic/pre pr-d/codeblock pre codeblock"><code># class representing a collection BIM objects
-class briqpy.ObjectRange
-    # filtering the range with a function
-    def filter(function)
+            <pre class="+ topic/pre pr-d/codeblock pre codeblock language-python"><em class="hl-comment"># class representing a collection BIM objects</em>
+<strong class="hl-keyword">class</strong> briqpy.ObjectRange
+    <em class="hl-comment"># filtering the range with a function</em>
+    <strong class="hl-keyword">def</strong> filter(function)
 
-    # filtering the range with conditions given as keyword arguments
-    def filter(**conditions)
+    <em class="hl-comment"># filtering the range with conditions given as keyword arguments</em>
+    <strong class="hl-keyword">def</strong> filter(**conditions)
 
-    # get a flat list of all the parts of all the elements in this range
-    def parts()
+    <em class="hl-comment"># get a flat list of all the parts of all the elements in this range</em>
+    <strong class="hl-keyword">def</strong> parts()
 
-    # get all parent objects of elements in this range 
-    def parents()
+    <em class="hl-comment"># get all parent objects of elements in this range </em>
+    <strong class="hl-keyword">def</strong> parents()
 
-    # get a flat list of objects that are within distance to any object in this range
-    def within_distance(distance, unit='undefined', distance_mode='exact', search_range=bim_model)
+    <em class="hl-comment"># get a flat list of objects that are within distance to any object in this range</em>
+    <strong class="hl-keyword">def</strong> within_distance(distance, unit=<span class="hl-string">'undefined'</span>, distance_mode=<span class="hl-string">'exact'</span>, search_range=bim_model)
 
-    # add objects to selection
-    def select()
+    <em class="hl-comment"># add objects to selection</em>
+    <strong class="hl-keyword">def</strong> select()
 
-    # remove objects from selection
-    def deselect()
+    <em class="hl-comment"># remove objects from selection</em>
+    <strong class="hl-keyword">def</strong> deselect()
 
-    # number of elements in the object range
-    def count()</code></pre>
+    <em class="hl-comment"># number of elements in the object range</em>
+    <strong class="hl-keyword">def</strong> count()</pre>
          </div>
       </section>
    </div>
@@ -209,11 +209,7 @@ class briqpy.ObjectRange
         </div> 
         <footer class="navbar navbar-default wh_footer" whc:version="22.1">
   <div class=" footer-container mx-auto ">
-    
-            Generated by <a class="oxyFooter" href="http://www.oxygenxml.com/xml_webhelp.html" target="_blank">
-            &lt;oXygen/&gt; XML WebHelp
-            </a>
-        
+    none
   </div>
 </footer>
         

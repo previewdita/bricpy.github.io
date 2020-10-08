@@ -1,0 +1,1 @@
+define({"topics" : [{"title":"APERTURE","href":"System%20Variable%20Reference\/aperture_16.html","attributes": {"data-id":"aperture_16",},"menu": {"hasChildren":false,},"tocID":"aperture_16-d61e24","topics":[]}]});

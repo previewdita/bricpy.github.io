@@ -1,0 +1,1 @@
+define({"topics" : [{"title":"PDMODE","href":"System%20Variable%20Reference\/pdmode.html","attributes": {"data-id":"pdmode",},"menu": {"hasChildren":false,},"tocID":"pdmode-d61e89","topics":[]},{"title":"PLINEGEN","href":"System%20Variable%20Reference\/plinegen.html","attributes": {"data-id":"plinegen",},"menu": {"hasChildren":false,},"tocID":"plinegen-d61e97","topics":[]}]});

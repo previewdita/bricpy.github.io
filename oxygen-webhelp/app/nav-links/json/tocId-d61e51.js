@@ -1,0 +1,1 @@
+define({"topics" : [{"title":"CETRANSPARENCY","href":"System%20Variable%20Reference\/cetransparency.html","attributes": {"data-id":"cetransparency",},"menu": {"hasChildren":false,},"tocID":"cetransparency-d61e52","topics":[]}]});
